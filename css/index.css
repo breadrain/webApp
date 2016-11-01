@@ -187,8 +187,8 @@ body,html{
     border-radius: .1rem;
     position: relative;
 
-    /*开始的时候让每一条消息都向下偏移1rem，当在js中控制显示的时候，我们在让它的偏移回归到0rem,这样的话
-    每一条消息的出现都会有一个小的动画效果*/
+    /*锟斤拷始锟斤拷时锟斤拷锟斤拷每一锟斤拷锟斤拷息锟斤拷锟斤拷锟斤拷偏锟斤拷1rem锟斤拷锟斤拷锟斤拷js锟叫匡拷锟斤拷锟斤拷示锟斤拷时锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷偏锟狡回归到0rem,锟斤拷锟斤拷锟侥伙拷
+    每一锟斤拷锟斤拷息锟侥筹拷锟街讹拷锟斤拷锟斤拷一锟斤拷小锟侥讹拷锟斤拷效锟斤拷*/
     -webkit-transform: translateY(1rem);
     transform: translateY(1rem);
     opacity: 0;
@@ -431,7 +431,7 @@ body,html{
     font-size: .2rem;
     font-style: normal;
 }
-/*couse 体系*/
+/*couse 锟斤拷系*/
 .page2{
     background:#FFF9C1;
 }
@@ -471,7 +471,7 @@ body,html{
     width: 1.32rem;
     height: 1.7rem;
 }
-/*实现动画的原理：我们把需要运动的元素以及设定的动画都放在#pageN下，这样的话以后只要给这个容器增加上对应的pageN的ID，就可以实现我们的动画效果*/
+/*实锟街讹拷锟斤拷锟斤拷原锟斤拷锟斤拷锟角帮拷锟斤拷要锟剿讹拷锟斤拷元锟斤拷锟皆硷拷锟借定锟侥讹拷锟斤拷锟斤拷锟斤拷锟斤拷#pageN锟铰ｏ拷锟斤拷锟斤拷锟侥伙拷锟皆猴拷只要锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷隙锟接︼拷锟絧ageN锟斤拷ID锟斤拷锟酵匡拷锟斤拷实锟斤拷锟斤拷锟角的讹拷锟斤拷效锟斤拷*/
 #page2 h2{
     -webkit-animation:  bounceInLeft 1s both;
     animation:  bounceInLeft 1s both;
@@ -538,7 +538,7 @@ body,html{
     top: 22%;
     width: 96%;
     color: #FFF;
-    font-size: .48rem;
+    font-size: .4rem;
     font-weight: bold;
     text-align: center;
 }
@@ -552,13 +552,13 @@ body,html{
 .page3 h2{
     position: absolute;
     left: 0;
-    top: 10%;
+    top: 12%;
     width: 100%;
     height: .75rem;
     line-height: .75rem;
     text-align: center;
     color: yellow;
-    font-size: .6rem;
+    font-size: .5rem;
     font-weight:bold;
     opacity: 0;
 }
@@ -799,7 +799,7 @@ body,html{
     position: absolute;
     top:7rem;
     left: 50%;
-    margin-left:  -2.5rem;
+    margin-left:  -2.1rem;
     background:url("../imgs/zf_contactInfo.png")no-repeat;
     background-size: 100%;
     width: 4.36rem;
