@@ -470,8 +470,8 @@ body,html{
     margin: -.85rem 0 0 -.66rem;
     width: 1.32rem;
     height: 1.7rem;
+    z-index: 1;
 }
-/*ʵ�ֶ�����ԭ�����ǰ���Ҫ�˶���Ԫ���Լ��趨�Ķ���������#pageN�£������Ļ��Ժ�ֻҪ��������������϶�Ӧ��pageN��ID���Ϳ���ʵ�����ǵĶ���Ч��*/
 #page2 h2{
     -webkit-animation:  bounceInLeft 1s both;
     animation:  bounceInLeft 1s both;
