@@ -28,22 +28,23 @@ var loadingRender = (function(){
         "imgs/zf_cube2.png","imgs/zf_cube3.png",
         "imgs/zf_cube4.png","imgs/zf_cube5.png",
         "imgs/zf_cube6.png","imgs/zf_messageArrow1.png",
-        "imgs/zf_messageArrow2.png","imgs/zf_feng01.png",
-        "imgs/zf_feng02.png","imgs/zf_feng03.png",
+        "imgs/zf_messageArrow2.png","imgs/zf_feng01.jpg",
+        "imgs/zf_feng02.jpg","imgs/zf_feng03.jpg",
         "imgs/zf_messageChat.png","imgs/zf_messageLogo.png",
         "imgs/zf_messageStudent.png","imgs/zf_outline.png",
+        "imgs/bell.mp3","imgs/music.mp3"
     ];
     var $loading = $('#loading'),
         $progress = $loading.children('.progress'),
         $span = $progress.children('span');
     var step = 0;
-        total = fileAry.length;
+    total = fileAry.length;
 
     function loadingFn(){
         step++;
-        oImg =null;//°ÑĞÂ´´½¨µÄÍ¼Ïó¶ÔÏóÊÍ·Å
+        oImg =null;//æŠŠæ–°åˆ›å»ºçš„å›¾è±¡å¯¹è±¡é‡Šæ”¾
         $span.css('width', step / total*100 +'%');
-        //ËùÓĞÍ¼Æ¬¶¼ÒÑ¾­¼ÓÔØÍê±Ï£º¹Ø±ÕLOADING,ÏÔÊ¾PHONE
+        //æ‰€æœ‰å›¾ç‰‡éƒ½å·²ç»åŠ è½½å®Œæ¯•ï¼šå…³é—­LOADING,æ˜¾ç¤ºPHONE
         if(step === total){
             if(page === 0) return;
             window.setTimeout(function(){
@@ -54,13 +55,21 @@ var loadingRender = (function(){
     }
     return{
         init: function(){
-           $loading.css('display','block');
-            //Ñ­»·¼ÓÔØËùÓĞµÄÍ¼Æ¬£¬¿ØÖÆ½ø¶ÈÌõµÄ¿í¶È
+            $loading.css('display','block');
+            //å¾ªç¯åŠ è½½æ‰€æœ‰çš„å›¾ç‰‡ï¼Œæ§åˆ¶è¿›åº¦æ¡çš„å®½åº¦
             $.each(fileAry,function(index ,item){
-                var oImg = new Image;
-                oImg.src = item;
-                oImg.onload = loadingFn(oImg);
 
+                var reg = /\.([a-zA-Z0-9]+)/i,
+                    suffix = reg.exec(item)[1].toUpperCase();
+                if (suffix === 'MP3') {
+                    var oAudio = new Audio();
+                    oAudio.src = item;
+                    oAudio.onloadedmetadata = loadingFn;
+                }else{
+                    var oImg = new Image;
+                    oImg.src = item;
+                    oImg.onload = loadingFn(oImg);
+                }
             });
         }
     }
@@ -69,10 +78,10 @@ var loadingRender = (function(){
 /*--PHONE--*/
 var phoneRender = (function(){
     var $phone =$('#phone'),
-    $listen = $phone.children('.listen'),
-    $listenTouch = $listen.children('.touch'),
-    $details = $phone.children('.detailWrap'),
-    $detailsTouch = $details.find('.sonMore');
+        $listen = $phone.children('.listen'),
+        $listenTouch = $listen.children('.touch'),
+        $details = $phone.children('.detailWrap'),
+        $detailsTouch = $details.find('.sonMore');
 
     var listenMusic = $('#listenMusic')[0];
 
@@ -85,7 +94,7 @@ var phoneRender = (function(){
                 listenMusic.pause();
                 $details.css('transform','translateY(0)');
             });
-            //¸øÁË½âÏêÇé¼ÓÈëµ¥»÷ÊÂ¼ş
+            //ç»™äº†è§£è¯¦æƒ…åŠ å…¥å•å‡»äº‹ä»¶
             $detailsTouch.singleTap(function(){
                 $phone.css('transform','translateY('+document.documentElement.clientHeight+'px)')
                     .on('webkitTransitionEnd',function(){
@@ -119,19 +128,19 @@ var messageRender = (function(){
                 opacity:1,
                 transform:'translateY(0)'
             });
-            //µ±·¢ËÍÍê³ÉµÚÈıÌõµÄÊ±ºò£¬¿ªÆôÎÒÃÇµÄ¼üÅÌ²Ù×÷
+            //å½“å‘é€å®Œæˆç¬¬ä¸‰æ¡çš„æ—¶å€™ï¼Œå¼€å¯æˆ‘ä»¬çš„é”®ç›˜æ“ä½œ
             if(step === 2){
                 window.clearInterval(autoTimer);
                 $keyBoard.css('transform','translateY(0)');
                 $textTip.css('display','block');
                 textMove();
             }
-            //´ÓµÚËÄÌõ¿ªÊ¼£¬ÎÒÃÇ·¢ËÍÒ»ÌõÏûÏ¢£¬¶¼ĞèÒªÈÃÕû¸öÏûÏ¢ÇøÓòÍùÉÏÒÆ¶¯Ïà¹ØµÄ¾àÀë
+            //ä»ç¬¬å››æ¡å¼€å§‹ï¼Œæˆ‘ä»¬å‘é€ä¸€æ¡æ¶ˆæ¯ï¼Œéƒ½éœ€è¦è®©æ•´ä¸ªæ¶ˆæ¯åŒºåŸŸå¾€ä¸Šç§»åŠ¨ç›¸å…³çš„è·ç¦»
             if(step >=3 ){
                 bounceTop -= $cur[0].offsetHeight+10;
                 $messageList.css('transform','translateY(' + bounceTop + 'px)')
             }
-            //µ±ÏûÏ¢·¢ËÍÍê³É
+            //å½“æ¶ˆæ¯å‘é€å®Œæˆ
             if(step === total -1){
                 window.clearInterval(autoTimer);
                 window.setTimeout(function(){
@@ -143,9 +152,9 @@ var messageRender = (function(){
             }
         },1500);
     }
-    //textMove:ÊµÏÖÎÄ×Ö´òÓ¡»ú
+    //textMove:å®ç°æ–‡å­—æ‰“å°æœº
     function textMove(){
-        var text="°¡£¬ÄÇÊÇÊ²Ã´¶«Î÷°¡£¿",
+        var text="å•Šï¼Œé‚£æ˜¯ä»€ä¹ˆä¸œè¥¿ï¼Ÿ",
             n=-1,
             result='';
         var textTimer = window.setInterval(function(){
@@ -178,12 +187,12 @@ var cubeRender=(function(){
         $cubeBox = $cube.children('.cubeBox'),
         $cubeBoxList = $cubeBox.children('li');
 
-    //»¬¶¯´¦Àí
+    //æ»‘åŠ¨å¤„ç†
     function isSwipe(changeX,changeY){
         return Math.abs(changeX)>30 || Math.abs(changeY) >30;
     }
     function start(ev){
-        //ÊÖÖ¸¿ÉÄÜÓĞ¿É¸öµÄËùÒÔËüÊÇÒ»¸ö¼¯ºÏ£¬ÎÒÒªÑ¡È¡µÚÒ»¸ö
+        //æ‰‹æŒ‡å¯èƒ½æœ‰å¯ä¸ªçš„æ‰€ä»¥å®ƒæ˜¯ä¸€ä¸ªé›†åˆï¼Œæˆ‘è¦é€‰å–ç¬¬ä¸€ä¸ª
         var point = ev.touches[0];
         $(this).attr({
             strX:point.clientX,
@@ -225,7 +234,7 @@ var cubeRender=(function(){
                 rotateY:45
             }).on('touchstart',start).on('touchmove',move).on('touchend',end);
 
-            //->Ã¿Ò»Ãæµã»÷
+            //->æ¯ä¸€é¢ç‚¹å‡»
             $cubeBoxList.singleTap(function(){
                 var index = $(this).index();
                 $cube.css('display','none');
@@ -242,11 +251,11 @@ var swiperRender = (function(){
         $return = $('.return'),
         $sellTable=$(".sellTable");
     var data=[
-        ['É½¼¦' , .62  ,'#ff7676'],
-        ['ºÚÉ½Ñò' , .47 ,''],
-        ['ÎåºÚ¼¦' , .9 ,'#198CD2'],
-        ['×ßµØ¼¦' ,.76,'#E20C9F'],
-        ['ÄàäĞ' , .35 ,'#8FBB4C']
+        ['å±±é¸¡' , .62  ,'#ff7676'],
+        ['é»‘å±±ç¾Š' , .47 ,''],
+        ['äº”é»‘é¸¡' , .9 ,'#198CD2'],
+        ['èµ°åœ°é¸¡' ,.76,'#E20C9F'],
+        ['æ³¥æ¹«' , .35 ,'#8FBB4C']
     ];
     function componentBar(){
         $.each(data,function(index,item){
@@ -307,14 +316,14 @@ var swiperRender = (function(){
     return {
         init: function (index) {
             $swiper.css('display', 'block');
-            //³õÊ¼»¯SWIPERÊµÏÖÁù¸öÒ³ÃæÖ®¼äµÄÇĞ»»
+            //åˆå§‹åŒ–SWIPERå®ç°å…­ä¸ªé¡µé¢ä¹‹é—´çš„åˆ‡æ¢
             var mySwiper =  new Swiper('.swiper-container', {
                 effect: 'coverflow',
                 onTransitionEnd: function (example) {
-                    //Ö»Òªµ±ÇĞ»»µÄ²Ù×÷½áÊø²»¹ÜÊÇÇĞ»»µ½Ò»ÏÂ¸öÇøÓò»¹ÊÇÓÖ»Øµ½ÁË±¾ÇøÓò£¬¶¼»á´¥·¢swiperÄÚÖÃµÄÒ»¸öcss3µÄÇĞ»»¶¯»­£¬Í¬ÑùÒ²»á´¥·¢ÎÒÃÇµÄonTransitionEndÕâ¸ö»Øµ÷º¯ÊıÖ´ĞĞ
-                    //example:ÊÇÎÒÃÇµ±Ç°´´½¨µÄswiperÕâ¸öÀàµÄÒ»¸öÊµÀı
-                    //example.slides:¼ÇÂ¼ÁËµ±Ç°ËùÓĞµÄSLIDEÇĞ»»µÄ¿é
-                    //example.activeIndex:¼ÇÂ¼ÁËµ±Ç°ÕıÔÚÕ¹Ê¾µÄÕâÒ»»î¶¯µÄ¿éµÄË÷Òı
+                    //åªè¦å½“åˆ‡æ¢çš„æ“ä½œç»“æŸä¸ç®¡æ˜¯åˆ‡æ¢åˆ°ä¸€ä¸‹ä¸ªåŒºåŸŸè¿˜æ˜¯åˆå›åˆ°äº†æœ¬åŒºåŸŸï¼Œéƒ½ä¼šè§¦å‘swiperå†…ç½®çš„ä¸€ä¸ªcss3çš„åˆ‡æ¢åŠ¨ç”»ï¼ŒåŒæ ·ä¹Ÿä¼šè§¦å‘æˆ‘ä»¬çš„onTransitionEndè¿™ä¸ªå›è°ƒå‡½æ•°æ‰§è¡Œ
+                    //example:æ˜¯æˆ‘ä»¬å½“å‰åˆ›å»ºçš„swiperè¿™ä¸ªç±»çš„ä¸€ä¸ªå®ä¾‹
+                    //example.slides:è®°å½•äº†å½“å‰æ‰€æœ‰çš„SLIDEåˆ‡æ¢çš„å—
+                    //example.activeIndex:è®°å½•äº†å½“å‰æ­£åœ¨å±•ç¤ºçš„è¿™ä¸€æ´»åŠ¨çš„å—çš„ç´¢å¼•
                     change(example);
                 },
                 onInit: function(example){
@@ -323,8 +332,8 @@ var swiperRender = (function(){
             });
 
             index = index || 0;
+            //mySwiper.slideTo([index],[speed]):æŒ‡å®šç›´æ¥çš„è¿è¡Œåˆ°æŸä¸€ä¸ªåŒºåŸŸ
             mySwiper.slideTo(index, 0);
-            //mySwiper.slideTo([index],[speed]):Ö¸¶¨Ö±½ÓµÄÔËĞĞµ½Ä³Ò»¸öÇøÓò
 
             $return.singleTap(function(){
                 $swiper.css('display','none');
@@ -335,9 +344,9 @@ var swiperRender = (function(){
 })();
 
 var urlObj = window.location.href.queryURLParameter();
-    page= parseFloat(urlObj['page']);
+page= parseFloat(urlObj['page']);
 
-
+/*--è°ƒè¯•ä½¿ç”¨--*/
 if(page === 0 || isNaN(page)){
     loadingRender.init();
 }else if(page ===1){
