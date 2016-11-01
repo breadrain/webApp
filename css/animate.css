@@ -505,6 +505,7 @@
     }
 
     to {
+        opacity:1;
         -webkit-transform: none;
         transform: none;
     }
